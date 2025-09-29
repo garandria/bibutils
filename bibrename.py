@@ -9,7 +9,7 @@ from pylatexenc.latex2text import LatexNodes2Text
 
 
 def firstauthor(entry):
-    tmp = entry.fields_dict["author"].value.split("and")[0].split(",")
+    tmp = entry.fields_dict["author"].value.split(" and")[0].split(",")
     assert len(tmp) >= 1, "There should be at least one author"
     if len(tmp) == 1:
         fauthor = tmp[0].split()[-1]
