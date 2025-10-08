@@ -19,7 +19,6 @@ def main():
     cites = citations(folder)
     library = bibtexparser.parse_file(bib)
     newlib = bibtexparser.Library()
-    print(cites)
     for c in cites:
         if c in library.entries_dict:
             newlib.add(library.entries_dict[c])
