@@ -1,6 +1,7 @@
 import os
 import sys
 import shutil
+import argparse
 from string import punctuation
 from unidecode import unidecode
 import bibtexparser
@@ -124,7 +125,10 @@ class RenameFileMiddleware(BlockMiddleware):
 
 
 def main():
-    bib = sys.argv[1]
+    parser = argparse.ArgumentParser()
+    parser.add_argument("filename")
+    args = parser.parse_args()
+    bib = args.filename
     library = bibtexparser.parse_file(
         bib, append_middleware=[RenameKeyMiddleware(), RenameFileMiddleware()])
     shutil.copy(bib, f'{bib}.old')
