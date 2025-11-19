@@ -37,7 +37,7 @@ def venue(entry):
         match c:= ' '.join(entry.fields_dict["journal"].value.strip().split()):
             case "IEEE Transactions on Software Engineering" | "IEEE Trans. Softw. Eng.":
                 venue = "tse"
-            case "ACM Trans. Softw. Eng. Methodol.":
+            case "ACM Trans. Softw. Eng. Methodol." | "ACM Transactions on Software Engineering and Methodology":
                 venue = "tosem"
             case "Empirical Software Engineering" | "Empirical Softw. Engg.":
                 venue = "emse"
@@ -56,7 +56,7 @@ def venue(entry):
             case "The Art, Science, and Engineering of Programming":
                 venue = "programming"
             case "IEEE Software":
-                # venue = "ieeesoftware"
+                venue = "ieeesw"
                 pass
             case "Journal of Systems and Software":
                 venue = "jss"
@@ -68,7 +68,7 @@ def venue(entry):
             case "Computing in Science & Engineering":
                 venue = "cise"
             case "Proc. ACM Softw. Eng.":
-                venue = "pacmse"
+                venue = "fse"
             case "Nature":
                 venue = c.lower()
             case "Computer":
