@@ -47,6 +47,11 @@ def venue(entry):
                 venue = "toplas"
             case "Proc. ACM Program. Lang.":
                 venue = "pacmpl"
+                number = entry.fields_dict["number"].value
+                if "PLDI" in number:
+                    venue = "pldi"
+                elif "OOPSLA" in number:
+                    venue = "oopsla"
             case "ACM Trans. Comput. Syst.":
                 venue = "tocs"
             case "ACM Comput. Surv.":
@@ -69,6 +74,9 @@ def venue(entry):
                 venue = "cise"
             case "Proc. ACM Softw. Eng.":
                 venue = "fse"
+                number = entry.fields_dict["number"].value
+                if "ISSTA" in number:
+                    venue = "issta"
             case "Nature":
                 venue = c.lower()
             case "Computer":
@@ -91,8 +99,11 @@ def venue(entry):
             case "Software: Practice and Experience":
                 # venue = "software-practice"
                 pass
+            case "PLOS ONE":
+                venue = "plosone"
             case _:
                 pass
+
     return venue
 
 
@@ -113,12 +124,16 @@ class RenameKeyMiddleware(BlockMiddleware):
 class RenameFileMiddleware(BlockMiddleware):
 
     def transform_entry(self, entry, *args, **kwargs):
+        if "file" not in entry.fields_dict:
+            return entry
         oldp = entry["file"].strip()
         newp = oldp.split('/')
         ext = newp[-1].split('.')[-1]
         newp = newp[:-1] + [f"{entry.key}.{ext}"]
         newp = '/'.join(newp)
         entry["file"] = newp
+        if os.path.isfile(newp):
+            return entry
         if not oldp == newp:
             os.rename(oldp, newp)
         return entry
