@@ -17,7 +17,7 @@ def main():
         etype = entry.entry_type
         if etype in table:
             for field in entry.fields:
-                if field.key not in table[etype]:
+                if field.key.lower() not in table[etype]:
                     entry.pop(field.key)
         new_bib.add(entry)
     shutil.copy(args.filename, f'{args.filename}.old')
