@@ -10,9 +10,13 @@ def main():
 
     cur_bib = bibtexparser.parse_file(args.filename)
     new_bib = bibtexparser.Library()
-    table = {"inproceedings": ["author", "title", "booktitle", "year", "pages"],
-             "article": ["author", "journal", "number", "pages", "title", "volume", "year"]
-             }
+    table = {
+        "inproceedings": ["author", "title", "booktitle", "year", "pages"],
+        "article": ["author", "journal", "number", "pages", "title", "volume", "year"],
+        "book": ["author", "title", "edition", "year", "publisher", "pages"],
+        "inbook": ["author", "title", "booktitle", "edition", "year", "publisher", "pages"],
+        "techreport": ["author", "title", "institution", "number", "year"]
+    }
     for key, entry in cur_bib.entries_dict.items():
         etype = entry.entry_type
         if etype in table:
