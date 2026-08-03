@@ -11,11 +11,11 @@ def main():
     cur_bib = bibtexparser.parse_file(args.filename)
     new_bib = bibtexparser.Library()
     table = {
-        "inproceedings": ["author", "title", "booktitle", "year", "pages"],
-        "article": ["author", "journal", "number", "pages", "title", "volume", "year"],
-        "book": ["author", "title", "edition", "year", "publisher", "pages"],
-        "inbook": ["author", "title", "booktitle", "edition", "year", "publisher", "pages"],
-        "techreport": ["author", "title", "institution", "number", "year"]
+        "inproceedings" : ["author", "title", "year", "doi", "pages", "booktitle"],
+        "article"       : ["author", "title", "year", "doi", "pages", "journal", "number", "volume"],
+        "book"          : ["author", "title", "year", "doi", "pages", "edition", "publisher"],
+        "inbook"        : ["author", "title", "year", "doi", "pages", "edition", "booktitle", "publisher"],
+        "techreport"    : ["author", "title", "year", "doi", "institution", "number"]
     }
     for key, entry in cur_bib.entries_dict.items():
         etype = entry.entry_type
